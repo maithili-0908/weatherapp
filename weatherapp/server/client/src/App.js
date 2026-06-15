@@ -6,7 +6,7 @@ import './App.css';
 import { Routes, Route, Link } from "react-router-dom";
 import Favorites from "./Favorites";
 
-const apikey = "feff206daa60b539abe8fae8f2ab7f29";
+const apikey = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
  const [suggestions, setSuggestions] = useState([]);
@@ -151,7 +151,7 @@ const addFavorite = () => {
 };
   const saveWeatherData = async (data) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/weather', {
+      const response = await axios.post('https://weatherapp-4k1c.onrender.com/api/weather', {
         city: data.name,
         country: data.sys.country,
         temperature: Math.floor(data.main.temp),
