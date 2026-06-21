@@ -31,17 +31,16 @@ function App() {
 }, [weatherType]);
 
  useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const chennaiUrl =
     `https://api.openweathermap.org/data/2.5/weather?q=Chennai&appid=${apikey}&units=metric`;
 
   fetchWeatherData(chennaiUrl);
 
-
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } =
-          position.coords;
+        const { latitude, longitude } = position.coords;
 
         const locationUrl =
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apikey}&units=metric`;
