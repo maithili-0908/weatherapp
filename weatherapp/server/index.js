@@ -2,13 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const axios = require('axios');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Replace 'YOUR_MONGODB_URI' with your actual MongoDB connection URI
-const MONGODB_URI = 'YOUR_MONGODB_URI/weatherforecast';
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.error("MongoDB Error:", err));
 
 app.use(cors());
 app.use(express.json());
@@ -47,7 +49,9 @@ app.post('/api/weather', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
+app.get("/", (req, res) => {
+  res.send("Weather API Running Successfully");
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
