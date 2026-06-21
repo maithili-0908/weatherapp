@@ -13,7 +13,7 @@ function App() {
  const [uvIndex, setUvIndex] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-const [darkMode, setDarkMode] = useState(false);
+
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const weatherType = weatherData?.weather?.[0]?.main;
@@ -35,6 +35,7 @@ const [darkMode, setDarkMode] = useState(false);
     `https://api.openweathermap.org/data/2.5/weather?q=Chennai&appid=${apikey}&units=metric`;
 
   fetchWeatherData(chennaiUrl);
+
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -220,8 +221,11 @@ if (cloudElement) {
       time.innerText = (date.toLocaleTimeString(undefined, 'Asia/Kolkata')).replace(':00', '');
 
       let temp = document.createElement('p');
-      temp.innerText = Math.floor(forecast.list[i].main.temp_max) + ' °C' + ' / ' + Math.floor(forecast.list[i].main.temp_min) + ' °C';
-
+     temp.innerText = `${Math.floor(
+  forecast.list[i].main.temp_max
+)} °C / ${Math.floor(
+  forecast.list[i].main.temp_min
+)} °C`;
       div.appendChild(time);
       div.appendChild(temp);
 
@@ -249,7 +253,11 @@ if (cloudElement) {
       div.appendChild(day);
 
       let temp = document.createElement('p');
-      temp.innerText = Math.floor(forecast.list[i].main.temp_max) + ' °C' + ' / ' + Math.floor(forecast.list[i].main.temp_min) + ' °C';
+      temp.innerText = `${Math.floor(
+  forecast.list[i].main.temp_max
+)} °C / ${Math.floor(
+  forecast.list[i].main.temp_min
+)} °C`;
       div.appendChild(temp);
 
       let description = document.createElement('p');
